@@ -1,0 +1,26 @@
+body{
+    background:#f5f5f5;
+}
+
+.card{
+    transition:.25s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 12px 30px rgba(0,0,0,.12);
+}
+
+.card img{
+    height:250px;
+    object-fit:cover;
+}
+
+.navbar{
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+}
+
+footer{
+    color:#777;
+}
+

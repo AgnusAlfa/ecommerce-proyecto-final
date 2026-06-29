@@ -17,6 +17,13 @@ def agregar_al_carrito(request, producto_id):
         id=producto_id
     )
 
+    if producto.stock <= 0:
+        messages.error(
+        request,
+        "Producto sin stock."
+    )
+        return redirect("/")
+
     carrito, creado = Carrito.objects.get_or_create(
         usuario=request.user
     )
