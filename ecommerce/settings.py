@@ -25,8 +25,7 @@ SECRET_KEY = "django-insecure-qna)y#%fwti#1zs+trglus)oieda*@q^awr_x_13uddjlb)9df
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
@@ -38,6 +37,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "tienda",
+    "usuarios",
+    "carrito",
+    "pedidos",
 
 ]
 
@@ -117,3 +119,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = "static/"
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://localhost:8000",
+    "https://localhost:8001",
+]
+
+LOGIN_URL = "/usuarios/login/"
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"
+
+
