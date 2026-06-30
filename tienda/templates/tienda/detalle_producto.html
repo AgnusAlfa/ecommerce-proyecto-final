@@ -1,0 +1,112 @@
+{% extends "tienda/base.html" %}
+
+{% block title %}
+{{ producto.nombre }} | PLEIA
+{% endblock %}
+
+{% block content %}
+
+<div class="row align-items-center g-5">
+
+    <!-- Imagen -->
+
+    <div class="col-lg-6">
+
+        <div class="pleia-detail-image-container">
+
+            {% if producto.imagen %}
+
+                <img
+                    src="{{ producto.imagen }}"
+                    alt="{{ producto.nombre }}"
+                    class="img-fluid pleia-detail-image">
+
+            {% else %}
+
+                <div class="pleia-detail-placeholder">
+
+                    Sin imagen
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+    <!-- Información -->
+
+    <div class="col-lg-6">
+
+        <span class="pleia-badge">
+
+            PLEIA COLLECTION
+
+        </span>
+
+        <h1 class="pleia-detail-title">
+
+            {{ producto.nombre }}
+
+        </h1>
+
+        <p class="pleia-detail-description">
+
+            {{ producto.descripcion }}
+
+        </p>
+
+        <div class="pleia-detail-price">
+
+            ${{ producto.precio|floatformat:0 }}
+
+        </div>
+
+        {% if producto.stock > 0 %}
+
+            <p class="text-success mb-4">
+
+                Disponible · {{ producto.stock }} unidades
+
+            </p>
+
+            <a
+                href="{% url 'agregar_carrito' producto.id %}"
+                class="pleia-btn">
+
+                Agregar al carrito
+
+            </a>
+
+        {% else %}
+
+            <p class="text-danger mb-4">
+
+                Producto agotado
+
+            </p>
+
+            <button
+                class="pleia-btn-secondary"
+                disabled>
+
+                Sin stock
+
+            </button>
+
+        {% endif %}
+
+        <a
+            href="{% url 'catalogo' %}"
+            class="btn btn-link mt-4 ps-0 text-decoration-none">
+
+            ← Volver al catálogo
+
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

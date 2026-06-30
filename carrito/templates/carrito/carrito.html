@@ -1,119 +1,177 @@
 {% extends "tienda/base.html" %}
 
-
 {% block title %}
-Carrito de compras
+PLEIA | Carrito
 {% endblock %}
-
 
 {% block content %}
 
-<h1 class="mb-4">
-    Carrito de compras
-</h1>
+<section class="mb-5">
 
+    <h1 class="pleia-title mb-2">
+        Tu carrito
+    </h1>
+
+    <p class="pleia-subtitle">
+        Revisa tu selección antes de finalizar la compra.
+    </p>
+
+</section>
 
 {% if carrito.items.all %}
 
-<table class="table table-bordered align-middle">
+<div class="row g-5">
 
-    <thead>
-        <tr>
-            <th>Producto</th>
-            <th>Cantidad</th>
-            <th>Precio</th>
-            <th>Subtotal</th>
-            <th>Acción</th>
-        </tr>
-    </thead>
+    <!-- Productos -->
 
-
-    <tbody>
+    <div class="col-lg-8">
 
         {% for item in carrito.items.all %}
 
-        <tr>
+        <div class="card pleia-cart-card mb-4">
 
-            <td>
-                {{ item.producto.nombre }}
-            </td>
+            <div class="card-body">
 
+                <div class="row align-items-center">
 
-            <td>
+                    <div class="col-md-5">
 
-                <form method="post" action="{% url 'actualizar_cantidad' item.id %}">
+                        <h5 class="pleia-product-title mb-2">
+                            {{ item.producto.nombre }}
+                        </h5>
 
-                    {% csrf_token %}
+                        <p class="text-muted mb-0">
+                            ${{ item.producto.precio|floatformat:0 }}
+                        </p>
 
-                    <input 
-                        type="number" 
-                        name="cantidad" 
-                        value="{{ item.cantidad }}" 
-                        min="1"
-                        style="width:70px;"
-                    >
+                    </div>
 
-                    <button type="submit" class="btn btn-sm btn-primary">
-                        Actualizar
-                    </button>
+                    <div class="col-md-3">
 
-                </form>
+                        <form
+                            method="post"
+                            action="{% url 'actualizar_cantidad' item.id %}">
 
-            </td>
+                            {% csrf_token %}
 
+                            <input
+                                type="number"
+                                name="cantidad"
+                                value="{{ item.cantidad }}"
+                                min="1"
+                                class="form-control mb-2">
 
-            <td>
-                ${{ item.producto.precio }}
-            </td>
+                            <button
+                                type="submit"
+                                class="pleia-btn w-100">
 
+                                Actualizar
 
-            <td>
-                ${{ item.subtotal }}
-            </td>
+                            </button>
 
+                        </form>
 
-            <td>
+                    </div>
 
-                <a href="{% url 'eliminar_item' item.id %}" 
-                   class="btn btn-sm btn-danger">
-                    Eliminar
-                </a>
+                    <div class="col-md-2 text-center">
 
-            </td>
+                        <strong>
 
+                            ${{ item.subtotal|floatformat:0 }}
 
-        </tr>
+                        </strong>
 
+                    </div>
+
+                    <div class="col-md-2 text-end">
+
+                        <a
+                            href="{% url 'eliminar_item' item.id %}"
+                            class="pleia-btn-secondary text-decoration-none">
+
+                            Eliminar
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
 
         {% endfor %}
 
-    </tbody>
+    </div>
 
-</table>
+    <!-- Resumen -->
 
+    <div class="col-lg-4">
 
-<h3 class="mt-4">
-    Total:
-    ${{ carrito.total }}
-</h3>
+        <div class="card pleia-summary-card">
 
+            <div class="card-body">
 
-<a href="{% url 'confirmar_compra' %}" class="btn btn-success mt-3">
-    Confirmar compra
-</a>
+                <h4 class="mb-4">
 
+                    Resumen
 
-{% else %}
+                </h4>
 
-<div class="alert alert-info">
+                <div class="d-flex justify-content-between mb-3">
 
-    Tu carrito está vacío.
+                    <span>Total</span>
+
+                    <strong>
+
+                        ${{ carrito.total|floatformat:0 }}
+
+                    </strong>
+
+                </div>
+
+                <hr>
+
+                <a
+                    href="{% url 'confirmar_compra' %}"
+                    class="pleia-btn w-100 text-center">
+
+                    Finalizar compra
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </div>
 
+{% else %}
+
+<div class="card text-center p-5">
+
+    <h3 class="mb-3">
+        Tu carrito está vacío.
+    </h3>
+
+    <p class="text-muted mb-4">
+        Explora la colección PLEIA y agrega productos a tu carrito.
+    </p>
+
+    <a
+        href="{% url 'catalogo' %}"
+        class="pleia-btn">
+
+        Ir al catálogo
+
+    </a>
+
+</div>
 
 {% endif %}
-
 
 {% endblock %}
 

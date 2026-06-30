@@ -1,33 +1,54 @@
 {% extends "tienda/base.html" %}
 
-
 {% block title %}
-Iniciar sesión
+PLEIA | Iniciar sesión
 {% endblock %}
-
 
 {% block content %}
 
-<div class="row justify-content-center">
+<div class="row justify-content-center align-items-center">
 
-    <div class="col-md-5">
+    <div class="col-lg-5 col-md-7">
 
-        <h2 class="mb-4">
-            Iniciar sesión
-        </h2>
+        <div class="card pleia-login-card">
 
+            <div class="card-body p-5">
 
-        <form method="post">
+                <div class="text-center mb-5">
 
-            {% csrf_token %}
+                    <h1 class="pleia-logo mb-3">
+                        PLEIA
+                    </h1>
 
-            {{ form.as_p }}
+                    <h2 class="pleia-login-title">
+                        Bienvenido
+                    </h2>
 
-            <button type="submit" class="btn btn-primary">
-                Ingresar
-            </button>
+                    <p class="pleia-login-subtitle">
+                        Inicia sesión para acceder a tu cuenta y continuar con tu compra.
+                    </p>
 
-        </form>
+                </div>
+
+                <form method="post">
+
+                    {% csrf_token %}
+
+                    {{ form.as_p }}
+
+                    <button
+                        type="submit"
+                        class="pleia-btn w-100 mt-4">
+
+                        Iniciar sesión
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
 
     </div>
 

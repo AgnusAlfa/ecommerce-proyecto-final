@@ -1,78 +1,90 @@
 {% extends "tienda/base.html" %}
 
 {% block title %}
-Catálogo de productos
+PLEIA | Catálogo
 {% endblock %}
 
 {% block content %}
 
-<div class="d-flex justify-content-between align-items-center mb-4">
+<section class="mb-5">
 
-    <div>
-        <h1 class="fw-bold mb-1">
-            Catálogo
+    <div class="text-center">
+
+        <h1 class="pleia-title">
+            Tecnología diseñada para durar.
         </h1>
 
-        <p class="text-muted mb-0">
-            Descubre nuestros productos disponibles.
+        <p class="pleia-subtitle mx-auto">
+            Descubre la colección PLEIA. Productos seleccionados por tu diseño,
+            funcionalidad e innovación, pensados para ofrecer una experiencia
+            tecnológica premium.
         </p>
+
     </div>
 
-</div>
+</section>
 
 
 <div class="row g-4">
 
     {% for producto in productos %}
 
-    <div class="col-sm-6 col-lg-4 col-xl-3">
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
 
-        <div class="card border-0 shadow-sm h-100">
+        <div class="card pleia-product-card h-100">
 
             {% if producto.imagen %}
 
-            <img src="{{ producto.imagen.url }}" class="card-img-top" alt="{{ producto.nombre }}">
+            <img src="{{ producto.imagen }}" class="card-img-top pleia-product-image" alt="{{ producto.nombre }}">
 
             {% endif %}
 
             <div class="card-body d-flex flex-column">
 
-                <h4 class="card-title fw-bold">
-                    {{ producto.nombre }}
-                </h4>
+                <h5 class="pleia-product-title">
 
-                <p class="text-muted flex-grow-1">
-                    {{ producto.descripcion }}
+                    {{ producto.nombre }}
+
+                </h5>
+
+                <p class="pleia-product-description flex-grow-1">
+
+                    {{ producto.descripcion|truncatechars:90 }}
+
                 </p>
 
-                <h3 class="text-primary fw-bold">
+                <div class="pleia-price">
+
                     ${{ producto.precio|floatformat:0 }}
-                </h3>
+
+                </div>
 
                 {% if producto.stock > 0 %}
 
-                <span class="badge bg-success mb-3">
-                    Stock: {{ producto.stock }}
-                </span>
+                <small class="text-success mb-3">
 
-                {% else %}
+                    Disponible · {{ producto.stock }} unidades
 
-                <span class="badge bg-danger mb-3">
-                    Sin stock
-                </span>
+                </small>
 
-                {% endif %}
+                <a href="{% url 'detalle_producto' producto.id %}" class="pleia-btn text-center">
 
-                {% if producto.stock > 0 %}
+                    Ver producto
 
-                <a href="{% url 'agregar_carrito' producto.id %}" class="btn btn-primary w-100">
-                    🛒 Agregar al carrito
                 </a>
 
                 {% else %}
 
-                <button class="btn btn-secondary w-100" disabled>
+                <small class="text-danger mb-3">
+
+                    Producto agotado
+
+                </small>
+
+                <button class="pleia-btn-secondary" disabled>
+
                     Sin stock
+
                 </button>
 
                 {% endif %}
@@ -87,9 +99,15 @@ Catálogo de productos
 
     <div class="col-12">
 
-        <div class="alert alert-warning">
+        <div class="alert alert-light text-center p-5">
 
-            No existen productos disponibles.
+            <h4 class="mb-3">
+                No hay productos disponibles.
+            </h4>
+
+            <p class="text-muted mb-0">
+                Muy pronto encontrarás nuevos productos PLEIA.
+            </p>
 
         </div>
 

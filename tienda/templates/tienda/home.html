@@ -1,0 +1,278 @@
+{% extends "tienda/base.html" %}
+{% load static %}
+
+{% block title %}
+PLEIA | Inicio
+{% endblock %}
+
+{% block content %}
+
+<!-- ========================= -->
+<!-- HERO -->
+<!-- ========================= -->
+
+<section class="hero-section py-5">
+
+    <div class="container">
+
+        <div class="row align-items-center">
+
+            <div class="col-lg-5">
+
+                <h1 class="display-2 fw-bold mb-4">
+                    Discover technology designed to inspire.
+                </h1>
+
+                <p class="lead text-muted mb-4">
+                    En PLEIA seleccionamos tecnología premium con foco en diseño,
+                    calidad e innovación.
+                </p>
+
+                <p class="lead text-muted mb-5">
+                    Menos ruido. Más propósito.
+                </p>
+
+                <a href="{% url 'catalogo' %}" class="btn btn-dark btn-lg px-5">
+                    Explorar productos →
+                </a>
+
+            </div>
+
+            <div class="col-lg-7 text-center">
+
+                <img
+                    src="{% static 'img/hero/hero-notebook.png' %}"
+                    class="img-fluid hero-image"
+                    alt="Notebook PLEIA">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ========================= -->
+<!-- PRODUCTOS DESTACADOS -->
+<!-- ========================= -->
+
+<section class="py-5">
+
+    <div class="container">
+
+        <div class="d-flex justify-content-between align-items-end mb-5">
+
+            <div>
+
+                <small class="text-uppercase text-muted">
+                    Destacados
+                </small>
+
+                <h2 class="display-5 fw-bold">
+                    Productos PLEIA <br>
+                    diseñados para tu día a día.
+                </h2>
+
+            </div>
+
+            <a href="{% url 'catalogo' %}"
+               class="text-dark text-decoration-none fs-5">
+
+                Ver catálogo completo →
+
+            </a>
+
+        </div>
+
+        <div class="row g-4">
+
+            {% for producto in productos %}
+
+            <div class="col-lg-4">
+
+                <div class="card h-100 border rounded-4 shadow-sm">
+
+                    {% if producto.nombre == "PLEIA Headphones Pro" %}
+
+                        <img
+                        src="{% static 'img/productos/headphones-pro.png' %}"
+                        class="card-img-top producto-img"
+                        alt="{{ producto.nombre }}">
+
+                    {% elif producto.nombre == "PLEIA Laptop 15" %}
+
+                        <img
+                        src="{% static 'img/productos/laptop-15.png' %}"
+                        class="card-img-top producto-img"
+                        alt="{{ producto.nombre }}">
+
+                    {% elif producto.nombre == "PLEIA Watch" %}
+
+                        <img
+                        src="{% static 'img/productos/pleia-watch.png' %}"
+                        class="card-img-top producto-img"
+                        alt="{{ producto.nombre }}">
+
+                    {% endif %}
+
+                    <div class="card-body d-flex flex-column">
+
+                        <h5 class="fw-semibold">
+                            {{ producto.nombre }}
+                        </h5>
+
+                        <p class="text-muted small flex-grow-1">
+                            {{ producto.descripcion|truncatewords:10 }}
+                        </p>
+
+                        <h4 class="fw-bold">
+                            ${{ producto.precio|floatformat:0 }}
+                        </h4>
+
+                        <a href="{% url 'detalle_producto' producto.id %}"
+                           class="btn btn-dark mt-3 w-100">
+
+                            Descubrir →
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ========================= -->
+<!-- EXPERIENCIA -->
+<!-- ========================= -->
+
+<section class="py-5">
+
+    <div class="container text-center">
+
+        <small class="text-uppercase text-muted">
+            La experiencia PLEIA
+        </small>
+
+        <h2 class="display-5 fw-bold mb-5">
+            Tecnología con propósito.
+        </h2>
+
+        <div class="row">
+
+            <div class="col-md-4">
+
+                <h3 class="h3">
+                    Diseño esencial
+                </h3>
+
+                <p class="text-muted">
+                    Productos creados para integrarse con elegancia
+                    en tu día a día.
+                </p>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <h3 class="h3">
+                    Calidad que perdura
+                </h3>
+
+                <p class="text-muted">
+                    Materiales premium y garantía
+                    para tu tranquilidad.
+                </p>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <h3 class="h3">
+                    Innovación continua
+                </h3>
+
+                <p class="text-muted">
+                    Seleccionamos lo mejor
+                    de la tecnología actual.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ========================= -->
+<!-- NEWSLETTER -->
+<!-- ========================= -->
+
+<section class="py-5">
+
+    <div class="container">
+
+        <div class="row align-items-center">
+
+            <div class="col-lg-6">
+
+                <h2 class="display-5 fw-bold">
+                    Sé el primero en descubrir novedades.
+                </h2>
+
+                <p class="lead text-muted">
+                    Suscríbete y recibe lanzamientos,
+                    recomendaciones y contenido exclusivo.
+                </p>
+
+            </div>
+
+            <div class="col-lg-6">
+
+                <form class="row g-3">
+
+                    <div class="col-md-8">
+
+                        <input
+                            type="email"
+                            class="form-control form-control-lg"
+                            placeholder="Tu correo electrónico">
+
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <button
+                            class="btn btn-dark btn-lg w-100">
+
+                            Suscribirme
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
+

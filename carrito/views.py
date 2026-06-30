@@ -140,8 +140,16 @@ def confirmar_compra(request):
         precio=item.producto.precio
     )
 
-    item.producto.stock -= item.cantidad
-    item.producto.save()
+    if item.producto.stock >= item.cantidad:
+        item.producto.stock -= item.cantidad
+        item.producto.save()
+    else:
+        messages.error(
+            request,
+            f"No hay suficiente stock de {item.producto.nombre}."
+    
+        )
+        return redirect("/carrito/")
 
 
     carrito.items.all().delete()
